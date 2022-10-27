@@ -9,14 +9,14 @@ class ProductController extends Controller
 {
     public function store (Request $request)
     {
-        $data = $request->validate([
-            'title' => ['required', 'string', 'max:150'],
-            'description' => ['nullable', 'string', 'max:5000']
-        ]);
-
-        $product = Product::create($data);
-
-        return response()->json($product);
+        return response()->json(
+            Product::create(
+                $request->validate([
+                    'title' => ['required', 'string', 'max:150'],
+                    'description' => ['nullable', 'string', 'max:5000']
+                ])
+            )
+        );
     }
 
     public function get ()
@@ -24,5 +24,20 @@ class ProductController extends Controller
         return response()->json(
             Product::get()
         );
+    }
+
+    public function getById (string $id)
+    {
+        $entity = Product::where('id', $id)->first();
+
+        if (empty($entity))
+        {
+            return response()->json([
+                'code' => '1',
+                'message' => 'product not found'
+            ], 404);
+        }
+
+        return response()->json($entity);
     }
 }

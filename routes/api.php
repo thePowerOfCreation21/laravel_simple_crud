@@ -17,3 +17,4 @@ use App\Http\Controllers\ProductController;
 
 Route::post('/product', [ProductController::class, 'store']);
 Route::get('/product', [ProductController::class, 'get']);
+Route::get('/product/{id}', [ProductController::class, 'getById']);
