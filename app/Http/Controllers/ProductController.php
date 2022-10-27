@@ -54,4 +54,13 @@ class ProductController extends Controller
             'message' => 'product updated successfully'
         ]);
     }
+
+    public function deleteById(string $id)
+    {
+        Product::where('id', $id)->delete();
+
+        return response()->json([
+            'message' => 'product deleted successfully'
+        ]);
+    }
 }
