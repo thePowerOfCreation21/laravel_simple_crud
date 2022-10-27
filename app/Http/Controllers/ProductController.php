@@ -18,4 +18,11 @@ class ProductController extends Controller
 
         return response()->json($product);
     }
+
+    public function get ()
+    {
+        return response()->json(
+            Product::get()
+        );
+    }
 }

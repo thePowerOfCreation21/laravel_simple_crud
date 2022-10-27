@@ -16,3 +16,4 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::post('/product', [ProductController::class, 'store']);
+Route::get('/product', [ProductController::class, 'get']);
