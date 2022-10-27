@@ -40,4 +40,18 @@ class ProductController extends Controller
 
         return response()->json($entity);
     }
+
+    public function updateById (string $id, Request $request)
+    {
+        Product::where('id', $id)->update(
+            $request->validate([
+                'title' => ['string', 'max:150'],
+                'description' => ['string', 'max:5000']
+            ])
+        );
+
+        return response()->json([
+            'message' => 'product updated successfully'
+        ]);
+    }
 }
