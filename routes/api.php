@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,10 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::post('/product', [ProductController::class, 'store']);
-Route::get('/product', [ProductController::class, 'get']);
-Route::get('/product/{id}', [ProductController::class, 'getById']);
 Route::put('/product/{id}', [ProductController::class, 'updateById']);
 Route::delete('/product/{id}', [ProductController::class, 'deleteById']);
+
+Route::get('/product', [ProductController::class, 'get']);
+Route::get('/product/{id}', [ProductController::class, 'getById']);
+
+Route::post('/admin/login', [AdminController::class, 'login']);
