@@ -16,9 +16,13 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::post('/product', [ProductController::class, 'store']);
-Route::put('/product/{id}', [ProductController::class, 'updateById']);
-Route::delete('/product/{id}', [ProductController::class, 'deleteById']);
+Route::group([
+    'middleware' => 'auth:admin'
+], function(){
+    Route::post('/product', [ProductController::class, 'store'])->middleware('auth:admin');
+    Route::put('/product/{id}', [ProductController::class, 'updateById']);
+    Route::delete('/product/{id}', [ProductController::class, 'deleteById']);
+});
 
 Route::get('/product', [ProductController::class, 'get']);
 Route::get('/product/{id}', [ProductController::class, 'getById']);
