@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClassResource;
+use App\Tests\ClassTest;
 use Illuminate\Http\Request;
 use App\Models\ClassModel;
 
@@ -9,21 +11,17 @@ class ClassController extends Controller
 {
     public function get ()
     {
-        return response()->json(ClassModel::all());
+        return response()->json(
+            ClassResource::collection(
+                ClassModel::get()
+            )
+        );
     }
 
     public function getById (string $id)
     {
-        $class = ClassModel::where('id', $id)->with('users')->first();
-        // $class = ClassModel::orderBy('id', 'DESC')->first();
-
-        if (empty($class))
-        {
-            return response()->json([
-                'message' => 'not found'
-            ], 404);
-        }
-
-        return $class;
+        return response()->json(
+            (new ClassTest())->getById($id)
+        );
     }
 }
